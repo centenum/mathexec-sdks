@@ -3,7 +3,7 @@ name: Parity check
 on:
   pull_request:
   push:
-    branches: [main, master]
+    branches: [master]
 
 jobs:
   parity:
