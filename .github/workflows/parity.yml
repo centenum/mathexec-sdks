@@ -43,5 +43,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: npm ci || npm install
+      # Drop the lockfile to dodge npm's platform-specific optional-deps bug
+      # (rollup's native binaries) — see https://github.com/npm/cli/issues/4828
+      - run: rm -f package-lock.json && npm install
       - run: npm run build

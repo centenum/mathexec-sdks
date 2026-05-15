@@ -38,8 +38,11 @@ jobs:
           python3 scripts/parity_check.py
 
       - name: Install + build
+        # Drop the lockfile to dodge npm's platform-specific optional-deps bug
+        # (rollup's native binaries) — see https://github.com/npm/cli/issues/4828
         run: |
-          npm ci || npm install
+          rm -f package-lock.json
+          npm install
           npm run build
 
       - name: Publish to npm
