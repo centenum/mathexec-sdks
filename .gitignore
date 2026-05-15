@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# JS
+node_modules/
+js/dist/
+*.tgz
+.npm/
+
+# Editors
+.vscode/
+.idea/
+.DS_Store
+
+# Env
+.env
+.env.local

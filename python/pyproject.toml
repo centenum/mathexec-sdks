@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mathexec"
+version = "0.1.0"
+description = "Python SDK for MathExec — call published model endpoints"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [
+    {name = "Centenum", email = "hello@mathexec.com"},
+]
+keywords = ["machine-learning", "api", "prediction", "mathexec", "pytorch", "modeling"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "requests>=2.20.0",
+]
+
+[project.urls]
+Homepage = "https://mathexec.com"
+Repository = "https://github.com/centenum/mathexec-sdks"
+Documentation = "https://mathexec.com/docs"
+Issues = "https://github.com/centenum/mathexec-sdks/issues"
+
+[tool.setuptools.packages.find]
+include = ["mathexec*"]

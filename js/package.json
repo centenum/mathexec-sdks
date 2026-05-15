@@ -1,0 +1,39 @@
+{
+  "name": "mathexec-sdk",
+  "version": "0.1.0",
+  "description": "JavaScript SDK for MathExec — call published model endpoints",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["machine-learning", "api", "prediction", "mathexec", "pytorch", "modeling"],
+  "author": "Centenum <hello@mathexec.com>",
+  "license": "MIT",
+  "homepage": "https://mathexec.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/centenum/mathexec-sdks.git",
+    "directory": "js"
+  },
+  "bugs": {
+    "url": "https://github.com/centenum/mathexec-sdks/issues"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,97 @@
+# MathExec SDK surface contract.
+#
+# Single source of truth for what the Python and JavaScript SDKs expose.
+# CI runs scripts/parity_check.py against this file to ensure both
+# languages stay aligned. When adding a method, add it here first.
+#
+# Each entry maps the canonical capability to its name in each language.
+# The parity check greps source files for these names — exact spelling
+# matters.
+
+version: 0.1.0
+
+# Top-level module exports (callable from `import mathexec` (Python) / `import { ... } from 'mathexec-sdk'` (JS)).
+top_level:
+  - id: Model
+    python: Model
+    js: Model
+    description: Class representing a published model.
+
+  - id: MathExecError
+    python: MathExecError
+    js: MathExecError
+    description: Error class raised on API failures (404, 429, 4xx).
+
+  - id: model_factory
+    python: model
+    js: model
+    description: Factory shorthand; Python emits a DeprecationWarning, JS keeps it for backwards compat.
+
+  - id: list_models
+    python: list_models
+    js: listModels
+    description: List the caller's published models. Requires API key.
+
+# Methods on the Model class.
+model_class:
+  - id: load
+    python: load
+    js: load
+    kind: static
+    description: Fetch a published model by ID. Fail-fast — touches /models/{id} to validate.
+
+  - id: info
+    python: info
+    js: info
+    kind: property_py_method_js
+    description: Lazy-cached model metadata.
+
+  - id: predict
+    python: predict
+    js: predict
+    description: Predict on a single sample (dict of named features or list of positional values).
+
+  - id: predict_batch
+    python: predict_batch
+    js: predictBatch
+    description: Predict on multiple samples.
+
+  - id: predict_label
+    python: predict_label
+    js: predictLabel
+    description: Return just the predicted label (sklearn-style convenience).
+
+  - id: predict_proba
+    python: predict_proba
+    js: predictProba
+    description: Return prediction probabilities. Raises for regression models.
+
+  - id: task_type
+    python: task_type
+    js: taskType
+    kind: property_py_method_js
+    description: '"classification" | "regression" | None.'
+
+  - id: class_labels
+    python: class_labels
+    js: classLabels
+    kind: property_py_method_js
+    description: Original target labels in encoded order.
+
+  - id: positive_class
+    python: positive_class
+    js: positiveClass
+    kind: property_py_method_js
+    description: For binary classification, the label encoded as 1.
+
+# Errors and exception behaviors that must be consistent.
+errors:
+  - id: rate_limited
+    description: HTTP 429 surfaces as MathExecError with message containing "Rate limited".
+    expect_in_python: 'Rate limited'
+    expect_in_js: 'Rate limited'
+
+  - id: not_found
+    description: HTTP 404 surfaces as MathExecError with message containing "not found".
+    expect_in_python: 'not found'
+    expect_in_js: 'not found'
